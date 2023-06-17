@@ -14,5 +14,8 @@ public class LoginService {
         List<UserModel> list = userRepository.findByEmailAndPassword(email,password);
         return list.size() > 0; // return true
     }
+    public List<UserModel> checkRole(String email){
+        return userRepository.findByRole( email);
+    }
 
 }

@@ -8,7 +8,7 @@ $(document).ready(function () {
         var This = $(this)
         $.ajax({
             method: "POST",
-            url: "http://localhost:8080/demoservlet_cybersoft/role/delete?id=" + id,
+            url: "http://localhost:8081/demoservlet_cybersoft/role/delete?id=" + id,
 
         })
             .done(function (result) {
