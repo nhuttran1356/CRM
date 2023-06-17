@@ -52,6 +52,38 @@ public class UserRepository {
         return userModelList;
     }
 
+    public List<UserModel> findByRole(String email) {
+        Connection connection = null;
+        List<UserModel> userModelList = new ArrayList<>();
+
+        try {
+            String sql = "select role_id from users u where u.email = ? ";
+            PreparedStatement statement = MysqlConfig.getConnection().prepareStatement(sql);
+            statement.setString(1, email);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                // Duyệt từng dòng dữ liệu
+                UserModel userModel = new UserModel();
+                // Lấy giá trị của cột chỉ định
+                userModel.setRoleId(resultSet.getInt("role_id"));
+                userModelList.add(userModel);
+            }
+        } catch (Exception e) {
+            System.out.println("Error findByRole: " + e.getMessage());
+        } finally {
+            // Try catch chạy xong sẽ chạy vào finally
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println("Lỗi đóng kết nối findByRole: " + e.getMessage());
+                }
+            }
+        }
+        return userModelList;
+    }
     public List<UserModel> findAll() {
         Connection connection = null;
         List<UserModel> userModelList = new ArrayList<>();

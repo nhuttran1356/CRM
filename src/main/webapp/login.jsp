@@ -40,6 +40,8 @@
                         <input type="checkbox" id="i" name="rememberme">
                         <label for="i">Remember me</label>
                     </div>
+<%--                    <a href="<c:url value="/user/update?id_update=${item.getId()}"/>"--%>
+<%--                       class="btn btn-sm btn-primary btn-update-user">Sửa</a>--%>
                     <button type="submit" class="btn btn-primary">Dang nhap</button>
                 </form>
             </div>

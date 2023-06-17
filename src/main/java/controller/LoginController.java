@@ -41,7 +41,9 @@ public class LoginController extends HttpServlet {
         String email = req.getParameter("username");
         String password = req.getParameter("password");
         String remember = req.getParameter("rememberme");
-        System.out.println(email + " 1 controller  " + password);
+//        System.out.println(email + " 1 controller  " + password);
+        List<UserModel> role = loginService.checkRole(email);
+//        System.out.println("Day la role" + role.get(0).getRoleId());
 
         boolean isSuccess = loginService.checkLogin(email, password);
         if (isSuccess && email != null && password != null) {
@@ -49,9 +51,11 @@ public class LoginController extends HttpServlet {
             session.setAttribute("email", email);
             session.setAttribute("password", password);
 
+            String roleS = String.valueOf(role.get(0).getRoleId());
+            session.setAttribute("role", roleS);
 
             String contextPath = req.getContextPath();
-            resp.sendRedirect(contextPath + "/index.jsp");
+            resp.sendRedirect(contextPath + "/index");
         } else {
             req.setAttribute("error", "Tài khoảng hoặc mật khẩu không đúng!");
             req.getRequestDispatcher("login.jsp").forward(req, resp);

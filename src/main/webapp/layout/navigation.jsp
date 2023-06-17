@@ -48,7 +48,8 @@
                             <li><a href="profile.html">Thông tin cá nhân</a></li>
                             <li><a href="#">Thống kê công việc</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Đăng xuất</a></li>
+<%--                            href="<c:url value="user/delete?id=${item.getId()}--%>
+                            <li><a href="<c:url value="/login?action=Logout"/>">Đăng xuất</a></li>
                         </ul>
                     </div>
                 </li>
