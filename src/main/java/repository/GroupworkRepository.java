@@ -76,4 +76,55 @@ public class GroupworkRepository {
         }
         return groupworkModelList;
     }
+
+    public boolean deleteByIdGroupwork(int id) {
+        Connection connection = null;
+        boolean isSuccess = false;
+        try {
+            connection = MysqlConfig.getConnection();
+            String sql = "delete from jobs j where j.id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            isSuccess = statement.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("Error deleteByIdGroupwork: " + e.getMessage());
+        } finally {
+            // Try catch chạy xong sẽ chạy vào finally
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println("Lỗi đóng kết nối deleteByIdGroupwork: " + e.getMessage());
+                }
+            }
+
+            return isSuccess;
+        }
+    }
+    public boolean updateByIdGroupwork(int id, String name, String start_date, String end_date) {
+        Connection connection = null;
+        boolean isSuccess = false;
+        try {
+            connection = MysqlConfig.getConnection();
+            String sql = "UPDATE jobs set name = ?, start_date  = ?, end_date=? WHERE id =?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, name);
+            statement.setString(2, start_date);
+            statement.setString(3, end_date);
+            statement.setInt(4, id);
+            isSuccess = statement.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("Error updateByIdGroupwork: " + e.getMessage());
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println("Error closing connection in updateByIdGroupwork: " + e.getMessage());
+                }
+            }
+            return isSuccess;
+        }
+    }
 }

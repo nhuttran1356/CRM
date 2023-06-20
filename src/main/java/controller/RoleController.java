@@ -70,6 +70,7 @@ public class RoleController extends HttpServlet {
             String des = request.getParameter("des");
             roleService.addRole(role, des);
         }
+
         request.getRequestDispatcher("/role-add.jsp").forward(request, response);
     }
 

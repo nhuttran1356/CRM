@@ -16,4 +16,12 @@ public class GroupworkService {
     public boolean insertGroupwork(String name, String start_date, String end_date) {
         return groupworkRepository.insertGroupwork(name, start_date, end_date);
     }
+
+    public boolean deleteGroupwork(int id) {
+        return groupworkRepository.deleteByIdGroupwork(id);
+    }
+
+    public boolean updateUser(int id, String name, String start_date, String end_date) {
+        return groupworkRepository.updateByIdGroupwork(id, name, start_date, end_date);
+    }
 }
