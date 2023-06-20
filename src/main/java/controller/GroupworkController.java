@@ -84,10 +84,10 @@ public class GroupworkController extends HttpServlet {
             String start_date = req.getParameter("start_date");
             String end_date = req.getParameter("end_date");
             int group_id = Integer.parseInt(req.getParameter("id_update"));
-            System.out.println("ten la " + jobname);
-            System.out.println("start_date la " + start_date);
-            System.out.println("end_date la " + end_date);
-            System.out.println("id la " + group_id);
+//            System.out.println("ten la " + jobname);
+//            System.out.println("start_date la " + start_date);
+//            System.out.println("end_date la " + end_date);
+//            System.out.println("id la " + group_id);
             groupworkService.updateUser(group_id, jobname, start_date, end_date);
 
             // Redirect to user table page after updating the user

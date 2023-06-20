@@ -22,5 +22,11 @@ public class TaskService {
         return taskRepository.insertTask(name, start_date , end_date, user_id, job_id, status_id);
 
     }
+    public boolean deleteRole(int id){
+        return taskRepository.deleteByIdTask(id);
+    }
+    public boolean updateTask(int id, String name, String start_date, String end_date){
+        return taskRepository.updateByIdTask(id, name,start_date,end_date);
+    }
 
 }
