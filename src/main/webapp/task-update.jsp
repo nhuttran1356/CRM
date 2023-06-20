@@ -22,7 +22,7 @@
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Thêm mới công việc</h4>
+                    <h4 class="page-title">Update công việc</h4>
                 </div>
             </div>
             <!-- /.row -->
@@ -31,51 +31,13 @@
                 <div class="col-md-2 col-12"></div>
                 <div class="col-md-8 col-xs-12">
                     <div class="white-box">
-                        <form action="<c:url value="/task/add"/>" method="post" class="form-horizontal form-material">
+                        <form action="<c:url value="/task/update"/>" method="post" class="form-horizontal form-material">
                             <div class="form-group">
                                 <label class="col-md-12">Dự án</label>
                                 <div class="col-md-12">
 
                                         <input type="text" placeholder="Tên dự án"
                                                class="form-control form-control-line" name="projectname">
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Tên công việc</label>
-                                <div class="col-md-12">
-
-                                    <select class="form-control form-control-line" name="workname">
-                                        <c:forEach items="${listGroup}" var="item">
-                                            <option value="${item.id}">${item.name}</option>
-                                        </c:forEach>
-                                    </select>
-<%--                                    <input type="text" placeholder="Tên công việc"--%>
-<%--                                           class="form-control form-control-line" name="workname">--%>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Người thực hiện</label>
-                                <div class="col-md-12">
-                                    <select class="form-control form-control-line" name="userworkname">
-                                    <c:forEach items="${listUsers}" var="item">
-                                        <option value="${item.id}">${item.fullname}</option>
-                                    </c:forEach>
-<%--                                        <input type="text" placeholder="Người thực hiện"--%>
-<%--                                               class="form-control form-control-line" name="userworkname">--%>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-12">Trạng thái</label>
-                                <div class="col-sm-12">
-                                    <select class="form-control form-control-line" name="status">
-
-                                        <c:forEach items="${list_Status}" var="item">
-                                            <option value="${item.id}">${item.name}</option>
-                                        </c:forEach>
-
-                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -94,6 +56,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
+                                    <input type="hidden" name="id_update" value="${param.id_update}" />
                                     <button type="submit" class="btn btn-success">Lưu lại</button>
                                     <a href="<c:url value="/task"/>" class="btn btn-primary">Quay lại</a>
                                 </div>

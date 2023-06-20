@@ -48,7 +48,12 @@ public class TaskRepository {
         List<TaskModel> taskModelList = new ArrayList<>();
 
         try {
-            String sql = "SELECT tasks.id, " + "tasks.name , " + "jobs.name , " + "users.fullname, " + "tasks.start_date , " + "tasks.end_date , " + "status.name " + "FROM tasks " + "INNER JOIN jobs ON tasks.job_id = jobs.id " + "INNER JOIN users ON tasks.user_id = users.id " + "INNER JOIN status ON tasks.status_id = status.id";
+            String sql = "SELECT tasks.id, " + "tasks.name , " + "jobs.name , " + "users.fullname, " +
+                    "tasks.start_date , " + "tasks.end_date , " + "status.name " +
+                    "FROM tasks " +
+                    "INNER JOIN jobs ON tasks.job_id = jobs.id " +
+                    "INNER JOIN users ON tasks.user_id = users.id " +
+                    "INNER JOIN status ON tasks.status_id = status.id";
             PreparedStatement statement = MysqlConfig.getConnection().prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
@@ -81,5 +86,55 @@ public class TaskRepository {
         }
         return taskModelList;
 
+    }
+
+    public boolean deleteByIdTask(int id) {
+        Connection connection = null;
+        boolean isSuccess = false;
+        try {
+            connection = MysqlConfig.getConnection();
+            String sql = "delete from tasks where id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            isSuccess = statement.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("Error deleteByIdTask: " + e.getMessage());
+        } finally {
+            // Try catch chạy xong sẽ chạy vào finally
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println("Lỗi đóng kết nối deleteByIdTask: " + e.getMessage());
+                }
+            }
+            return isSuccess;
+        }
+    }
+    public boolean updateByIdTask(int id, String name, String start_date, String end_date) {
+        Connection connection = null;
+        boolean isSuccess = false;
+        try {
+            connection = MysqlConfig.getConnection();
+            String sql = "UPDATE tasks t set t.name = ?, t.start_date  = ?, t.end_date = ? WHERE id = ?;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, name);
+            statement.setString(2, start_date);
+            statement.setString(3, end_date);
+            statement.setInt(4, id);
+            isSuccess = statement.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("Error updateByIdTask: " + e.getMessage());
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println("Error closing connection in updateByIdTask: " + e.getMessage());
+                }
+            }
+            return isSuccess;
+        }
     }
 }
