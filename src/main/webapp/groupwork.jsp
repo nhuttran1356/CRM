@@ -27,7 +27,7 @@
                     <h4 class="page-title">Danh sách dự án</h4>
                 </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                    <a href="groupwork-add.jsp" class="btn btn-sm btn-success">Thêm mới</a>
+                    <a href="<c:url value="/groupwork/add"/>" class="btn btn-sm btn-success">Thêm mới</a>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -54,8 +54,8 @@
                                         <td>${item.getStartDate()}</td>
                                         <td>${item.getEndDate()}</td>
                                         <td>
-                                            <a href="#" class="btn btn-sm btn-primary">Sửa</a>
-                                            <a href="#" class="btn btn-sm btn-danger">Xóa</a>
+                                            <a href="<c:url value="/groupwork/update?id_update=${item.getId()}"/>" class="btn btn-sm btn-primary">Sửa</a>
+                                            <span groupid="${item.getId()}" class="btn btn-sm btn-danger btn-delete-group">Xóa</span>
                                             <a href="groupwork-details.html" class="btn btn-sm btn-info">Xem</a>
                                         </td>
                                     </tr>
@@ -89,6 +89,7 @@
 <script src="js/waves.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="js/custom.min.js"></script>
+<script src="<c:url value="/js/groupwork-table.js?version=1"/>"></script>
 <script>
     $(document).ready(function () {
         $('#example').DataTable();
